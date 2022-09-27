@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using secureBridge_Services.Data;
 
@@ -11,9 +12,10 @@ using secureBridge_Services.Data;
 namespace secureBridge_Services.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220923104428_addUserModel")]
+    partial class addUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,87 +23,6 @@ namespace secureBridge_Services.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("secureBridge_Models.Models.ApplyOpportunity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("OpportunityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OpportunityId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ApplyOpportunities");
-                });
-
-            modelBuilder.Entity("secureBridge_Models.Models.Opportunity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsEvent")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFood")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsHousing")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsJob")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("Opportunities");
-                });
 
             modelBuilder.Entity("secureBridge_Models.Models.OpportunityTypes", b =>
                 {
@@ -241,75 +162,6 @@ namespace secureBridge_Services.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("secureBridge_Models.Models.Post", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PostComment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("secureBridge_Models.Models.Reply", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ReplyComment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Replies");
-                });
-
             modelBuilder.Entity("secureBridge_Models.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -364,36 +216,6 @@ namespace secureBridge_Services.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("secureBridge_Models.Models.ApplyOpportunity", b =>
-                {
-                    b.HasOne("secureBridge_Models.Models.Opportunity", "Opportunity")
-                        .WithMany()
-                        .HasForeignKey("OpportunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("secureBridge_Models.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Opportunity");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("secureBridge_Models.Models.Opportunity", b =>
-                {
-                    b.HasOne("secureBridge_Models.Models.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Organization");
-                });
-
             modelBuilder.Entity("secureBridge_Models.Models.OpportunityTypes", b =>
                 {
                     b.HasOne("secureBridge_Models.Models.Organization", "Organization")
@@ -414,41 +236,6 @@ namespace secureBridge_Services.Migrations
                         .IsRequired();
 
                     b.Navigation("Organization");
-                });
-
-            modelBuilder.Entity("secureBridge_Models.Models.Post", b =>
-                {
-                    b.HasOne("secureBridge_Models.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("secureBridge_Models.Models.Reply", b =>
-                {
-                    b.HasOne("secureBridge_Models.Models.Post", "Post")
-                        .WithMany("Replies")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("secureBridge_Models.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("secureBridge_Models.Models.Post", b =>
-                {
-                    b.Navigation("Replies");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,7 +15,14 @@ namespace secureBridge_Services.Data
 
         }
         //Db Models
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<OpportunityTypes> OpportunityTypes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Opportunity> Opportunities { get; set; }
+        public DbSet<ApplyOpportunity> ApplyOpportunities { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Reply> Replies { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -23,7 +30,7 @@ namespace secureBridge_Services.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=.;Database=SecureBridgeApi;Trusted_Connection=true;");
+            optionsBuilder.UseSqlServer("server=.;Database=SecureBridgeDb;Trusted_Connection=true;");
         }
     }
 }

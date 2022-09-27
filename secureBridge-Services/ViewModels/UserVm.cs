@@ -1,13 +1,12 @@
-﻿using secureBridge_Models.CommonModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace secureBridge_Models.Models
+namespace secureBridge_Services.ViewModels
 {
-    public class User : CommonEntities
+    public class UserVm
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;

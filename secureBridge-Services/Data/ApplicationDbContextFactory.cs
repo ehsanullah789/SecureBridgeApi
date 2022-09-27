@@ -13,7 +13,7 @@ namespace secureBridge_Services.Data
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("server=.;Database=SecureBridgeApi;Trusted_Connection=true;");
+            optionsBuilder.UseSqlServer("server=.;Database=SecureBridgeDb;Trusted_Connection=true;");
             return new ApplicationDbContext(optionsBuilder.Options);
         }
     }

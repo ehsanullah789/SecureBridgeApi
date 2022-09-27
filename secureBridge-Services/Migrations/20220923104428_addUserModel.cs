@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace secureBridge_Services.Migrations
 {
-    public partial class DbContext : Migration
+    public partial class addUserModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,10 +14,14 @@ namespace secureBridge_Services.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Zip = table.Column<int>(type: "int", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
